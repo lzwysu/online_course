@@ -68,3 +68,16 @@ class AddUserAskView(View):
             return HttpResponse('{"status":"fail", "msg":"添加出错"}', content_type='application/json')
 
 
+class OrgHomeView(View):
+    '''机构首页'''
+    def get(self,request,org_id):
+        # 根据id找到课程机构
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        # 反向查询到课程机构的所有课程和老师
+        all_courses = course_org.course_set.all()[:4]
+        all_teacher = course_org.teacher_set.all()[:2]
+        return render(request,'org-detail-homepage.html',{
+            'course_org':course_org,
+            'all_courses':all_courses,
+            'all_teacher':all_teacher,
+        })
