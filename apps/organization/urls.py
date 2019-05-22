@@ -6,4 +6,5 @@ app_name = 'organization'
 
 urlpatterns = [
     path('org_list/', OrgView.as_view(), name='org_list'),
+    path('add_ask/', AddUserAskView.as_view(),name="add_ask"),
 ]
